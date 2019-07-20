@@ -26,7 +26,7 @@ def convert_raw_to_tiff(input_dir, irfan_view_path):
 
     """
     :param config: Configuration dictionary
-    :param log: replayLogger object instance
+    :param log: Logger object instance
     :Description: This function converting RAW images to Tiff
     """
 
@@ -43,7 +43,7 @@ def debayer_images(input_dir, pip_path, static_path):
 
     """
     :param config: Configuration dictionary
-    :param log: replayLogger object instance
+    :param log: Logger object instance
     :Description: This function debayering images
     """
 
@@ -54,7 +54,7 @@ def debayer_images(input_dir, pip_path, static_path):
     output_path = os.path.join(input_dir, r'debayer')
     if not os.path.exists(output_path):
         os.mkdir(output_path)
-    lut_path = os.path.join(static_path, r'NATUERAL_LUT.tif')
+    lut_path = os.path.join(static_path, r'LUT.tif')
     bayer_template_file = os.path.join(static_path, r'bayer_template_file.xml')
     raw_images = os.listdir(raw_images_path)
 
