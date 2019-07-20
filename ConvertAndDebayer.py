@@ -60,29 +60,29 @@ def debayer_images(input_dir, pip_path, static_path):
 
     counter = 1
     for image in raw_images:
-        replace_file(bayer_template_file, {'{Pi_path}': pi_path,
+        replace_file(bayer_template_file, {'{process_path}': process_path,
                                            '{input_image}': os.path.join(raw_images_path, image),
                                            '{output_image}': os.path.join(output_path, r'%04d.jpg' % counter),
                                            '{LUT_path}': lut_path},
                      os.path.join(workdir_path, 'tempBayer.xml'))
-        cmd = os.path.join(pip_path, r'Pi.exe ') + os.path.join(workdir_path, 'tempBayer.xml')
+        cmd = os.path.join(process_path, r'Process.exe ') + os.path.join(workdir_path, 'tempBayer.xml')
         sp.call(cmd)
         counter += 1
 
 
 def run():
 
-    work_dir_path = r'D:\Mavericks'
-    static_path = r'C:\Apps\UndistortTool\staticFiles'
+    work_dir_path = r'D:\Images'
+    static_path = r'C:\Apps\convertndebayer\staticFiles'
     irfan_view_path = r'C:\Program Files (x86)\IrfanView'
-    pip_path = r'C:\Apps\PI'
+    pip_path = r'C:\Apps\Process'
     lens_list = os.walk(work_dir_path).next()[1]
     for lens in lens_list:
         lens_modes_list = os.walk(os.path.join(work_dir_path, lens)).next()[1]
         for mode in lens_modes_list:
 
             convert_raw_to_tiff(os.path.join(work_dir_path, lens, mode), irfan_view_path)
-            debayer_images(os.path.join(work_dir_path, lens, mode), pip_path, static_path)
+            debayer_images(os.path.join(work_dir_path, lens, mode), process_path, static_path)
 
 
 if __name__ == '__main__':
